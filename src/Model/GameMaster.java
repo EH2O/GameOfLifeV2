@@ -1,19 +1,24 @@
 package Model;
 import java.util.ArrayList;
-public class GameMaster {
-    public ArrayList<Model.Cell> getCells() {
-        ArrayList<Points>
+import java.util.zip.CheckedInputStream;
 
-        return cells;
+public class GameMaster {
+    int height = 0;
+    int width = 0;
+    ArrayList<Cell> cells = new ArrayList<>();
+
+    public GameMaster(int width, int height) {
+        this.height = height;
+        this.width = width;
     }
 
-    ArrayList<Cell> cells;
-    public void GeneratCells(int Width, int Height){
-        for (int i = 0; i < Width; i++) {
-            for (int j = 0; j < Height; j++) {
-                cells.add(new Cell(i,j, true));
+    public ArrayList GeneratCells(){
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                cells.add(new Cell(i,j, false));
             }
         }
+        return cells;
     }
 
 

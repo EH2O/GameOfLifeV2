@@ -4,7 +4,7 @@ public class Cell {
     int x;
     int y;
     Boolean state = false;
-    int Neighbours;
+    int Neighbours = 0;
 
     public int getX() {
         return x;
@@ -41,7 +41,7 @@ public class Cell {
             state = false;
         } else if (Neighbours == 3) {
             state = true;
-        } else if (Neighbours < 3) {
+        } else if(Neighbours > 3) {
             state = false;
         }
     }

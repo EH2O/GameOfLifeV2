@@ -4,8 +4,13 @@ public class Cell {
     int x;
     int y;
     Boolean state = false;
+    Boolean nextState = false;
     int Neighbours = 0;
 
+    public void setNextState(Boolean nextState){this.nextState = nextState;};
+    public Boolean getNextState() {
+        return nextState;
+    }
     public int getX() {
         return x;
     }
@@ -30,19 +35,23 @@ public class Cell {
         Neighbours = neighbours;
     }
 
-    public Cell(int x, int y, Boolean state) {
+    public Cell(int x, int y, Boolean state, Boolean nextState) {
         this.x = x;
         this.y = y;
         this.state = state;
+        this.nextState = nextState;
     }
 
     public void CheckNewState(){
         if(Neighbours < 2){
-            state = false;
+            nextState = false;
         } else if (Neighbours == 3) {
-            state = true;
+            nextState = true;
         } else if(Neighbours > 3) {
-            state = false;
+            nextState = false;
         }
+    }
+    public void nextScene(){
+        state = nextState;
     }
 }

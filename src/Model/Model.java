@@ -15,12 +15,12 @@ public class Model {
         this.width = width;
         this.height = height;
         cells = test.GeneratCells();
-        cells.get(171).setState(true);
-        cells.get(170).setState(true);
-        cells.get(220).setState(true);
-        cells.get(169).setState(true);
+        for (int i = 1; i < 40; i++) {
+            cells.get(i*50+120).setState(true);
 
-        update();
+        }
+
+
     }
 
     public void update() {

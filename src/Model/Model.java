@@ -28,43 +28,44 @@ public class Model {
     }
     public void countCellNeighbours(){
         for (int i = 0; i < cells.size(); i++) {
-            count += NeightbourCheck1(i,0);
-            count += NeightbourCheck1(i,100);
-            count += NeightbourCheck2(i);
-            if (count !=0){
-                System.out.println(count);
-            }
-            count = 0;
+            count += NeighbourCheck(i);
             test = 0;
-
+            cells.get(i).setNeighbours(count);
+            count = 0;
+            cells.get(i).CheckNewState();
+        }
+        for (int i = 0; i < cells.size(); i++) {
+            cells.get(i).nextScene();
         }
     }
-    private int NeightbourCheck2(int i){
-        for (int j = 0; j < 3; j++) {
-            if(cells.get(i).x+1  > width || cells.get(i).x - 1 < 0){
-                continue;
-            }else {
-                if (cells.get(i-1+j).getState()){
+
+    private int NeighbourCheck(int i){
+
+        if (cells.get(i).getY() != 1 && cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+                for (int j = 0; j < 3; j++) {
+                    if (cells.get(i-1+j-50).getState()){
+                        test++;
+                    }
+                }
+            }
+        if (cells.get(i).getY() != 50 && cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+            for (int j2 = 0; j2 < 3; j2++) {
+                if (cells.get(i-1+j2+50).getState()){
                     test++;
                 }
             }
         }
-        return test;
-    }
-    private int NeightbourCheck1(int i, int Height){
-        for (int j = 0; j < 3; j++) {
-            if(cells.get(i).x+1  > width || cells.get(i).x - 1 < 0){
-                continue;
-            }else {
-                if(cells.get(i).y + + 1  > height || cells.get(i).y-1 < 0) {
-                    continue;
-                }else {
-                    if(cells.get(i-1+j).getState()){
-                        test++;
-
-                    }
+        if(cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+            if(cells.get(i-1).getState()){
+                test++;
             }
-        }}
+            if(cells.get(i+1).getState()){
+                test++;
+            }
+        }
+
+
+
         return test;
     }
     public Shape[] getShapes() {

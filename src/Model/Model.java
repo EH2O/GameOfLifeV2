@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 public class Model {
     ArrayList<Cell> cells;
-    int width = 0;
-    int height = 0;
-    int count = 0;
+    int width;
+    int height;
+    int count;
     int test = 0;
 
     public Model(int width, int height) {
-        GameMaster test = new GameMaster(width, height);
+        GameMaster GenCell = new GameMaster(width, height);
         this.width = width;
         this.height = height;
-        cells = test.GeneratCells();
-        for (int i = 1; i < 40; i++) {
-            cells.get(i*50+120).setState(true);
+        cells = GenCell.GenerateCells();
+        for (int i = 1; i < width/2; i++) {
+            cells.get(i*height+width/2).setState(true);
 
         }
 
@@ -34,28 +34,28 @@ public class Model {
             count = 0;
             cells.get(i).CheckNewState();
         }
-        for (int i = 0; i < cells.size(); i++) {
-            cells.get(i).nextScene();
+        for (Cell cell : cells) {
+            cell.nextScene();
         }
     }
 
     private int NeighbourCheck(int i){
 
-        if (cells.get(i).getY() != 1 && cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+        if (cells.get(i).getY() != 1 && cells.get(i).getX() != 1 && cells.get(i).getX() != width){
                 for (int j = 0; j < 3; j++) {
-                    if (cells.get(i-1+j-50).getState()){
+                    if (cells.get(i-1+j-height).getState()){
                         test++;
                     }
                 }
             }
-        if (cells.get(i).getY() != 50 && cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+        if (cells.get(i).getY() != height && cells.get(i).getX() != 1 && cells.get(i).getX() != width){
             for (int j2 = 0; j2 < 3; j2++) {
-                if (cells.get(i-1+j2+50).getState()){
+                if (cells.get(i-1+j2+height).getState()){
                     test++;
                 }
             }
         }
-        if(cells.get(i).getX() != 1 && cells.get(i).getX() != 50){
+        if(cells.get(i).getX() != 1 && cells.get(i).getX() != width){
             if(cells.get(i-1).getState()){
                 test++;
             }
@@ -69,13 +69,12 @@ public class Model {
         return test;
     }
     public Shape[] getShapes() {
-        ArrayList<Point> points = new ArrayList<Point>();
-        for (int i = 0; i < cells.size(); i++) {
-            if (cells.get(i).state){
-                points.add(new Point(cells.get(i).y,cells.get(i).x));
+        ArrayList<Point> points = new ArrayList<>();
+        for (Cell cell : cells) {
+            if (cell.state) {
+                points.add(new Point(cell.getY(), cell.getX()));
             }
         }
-        Point[] pointsAr = points.toArray(new Point[0]);
-        return (Shape[])pointsAr;
+        return points.toArray(new Point[0]);
     }
 }

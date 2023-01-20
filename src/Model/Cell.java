@@ -3,14 +3,12 @@ package Model;
 public class Cell {
     int x;
     int y;
-    Boolean state = false;
-    Boolean nextState = false;
-    int Neighbours = 0;
+    Boolean state;
+    Boolean nextState;
+    int Neighbours;
 
-    public void setNextState(Boolean nextState){this.nextState = nextState;};
-    public Boolean getNextState() {
-        return nextState;
-    }
+
+
     public int getX() {
         return x;
     }
@@ -27,9 +25,7 @@ public class Cell {
         this.state = state;
     }
 
-    public int getNeighbours() {
-        return Neighbours;
-    }
+
 
     public void setNeighbours(int neighbours) {
         Neighbours = neighbours;
